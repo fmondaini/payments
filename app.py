@@ -22,7 +22,6 @@ def index():
 
 @app.route('/charge', methods=['POST'])
 def charge():
-    import pudb; pudb.set_trace()
     # Amount in cents
     amount = 500
 
