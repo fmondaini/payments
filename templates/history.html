@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <h1>History</h1>
+
+  <label>Customer ID</label>
+  <input type="text" ng-model="customer-id" class="form-control"/>
+  <button ng-click="getPurchaseHistory" type="submit" class="btn btn-default">Search</button>
+   <!-- Inserir um NG-repeat aqui com a lista de pagamento. -->
+
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td>Purchase ID</td>
+        <td>Amount</td>
+        <td>Date</td>
+      </tr> 
+    </thead>
+    <tbody>
+      <!-- NGREPEAT -->
+      <tr>
+        <td>1</td>
+        <td>$5.00</td>
+        <td>2014-3-9</td>
+      </tr> 
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
