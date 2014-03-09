@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="paymentsApp">
+  <head>
+
+    <title>Payments App</title>
+
+    <link href="/static/lib/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/app.css"/>
+    
+    <script type="text/javascript" src="/static/lib/js/stripe.v2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="/static/lib/js/jquery-1.11.0.min.js"></script>
+
+    <script type="text/javascript">
+      Stripe.setPublishableKey('pk_test_xxaHRANqTFxEQkszICPIGq7y');
+    </script>
+  </head>
+
+<body>
+  <ul class="menu">
+    <li><a href="/">Home</a></li>
+    <li><a href="#">Payment history</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+
+  {% block content %}
+  {% endblock %}
+
+  <script src="/static/lib/js/jquery.payment.js"></script>
+  <script src="/static/lib/angular/angular-route.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/services.js"></script>
+  <script src="/static/js/controllers.js"></script>
+  <script src="/static/js/filters.js"></script>
+  <script src="/static/js/directives.js"></script>
+</body>
+</html>
