@@ -1,24 +1,29 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="paymentsApp">
 <head>
   <meta charset="utf-8">
   <title>My AngularJS App</title>
   <link rel="stylesheet" href="css/app.css"/>
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
 </head>
 <body>
+  <div ng-view="menu"></div>
   <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="payments_list.html">Payment history</a></li>
+    <li><a href="payments_new.html">New payment</a></li>
   </ul>
 
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
+ Payment List
+ <!-- Inserir um NG-repeat aqui com a lista de pagamento. -->
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-stripe.js"></script>
   <script src="lib/angular/angular-route.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>

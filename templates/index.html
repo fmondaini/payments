@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="paymentsApp">
+  <head>
+
+    <title>Payments App</title>
+
+    <link href="/static/lib/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/app.css"/>
+    
+    <script type="text/javascript" src="/static/lib/js/stripe.v2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="/static/lib/js/jquery-1.11.0.min.js"></script>
+
+    <script type="text/javascript">
+      Stripe.setPublishableKey('pk_test_xxaHRANqTFxEQkszICPIGq7y');
+    </script>
+    
+
+  </head>
+  <body>
+
+    <div class="container" ng-controller="PaymentsController">
+
+      <div class="row">
+        <div class="span4 offset4">
+          <div class="row">
+            
+            <div class="span4">
+              <h3>Subscribe!</h3>
+            </div>
+            
+            <form action="" method="POST" id="payment-form">
+              <span class="payment-errors"></span>
+
+              <div class="span4">
+                <label for="">Card number</label>
+                <input type="text" class="input-block-level" ng-model="payment.number" placeholder="XXXX XXXX XXXX XXXX" size="20"/>
+              </div>
+              
+              <div class="span4 inline">
+              <label for="">Expiry</label>
+                <div>
+                <input type="text" class="input-block-level" ng-model="payment.exp_month" placeholder="MM" data-stripe="exp-month" size="2"/>
+                <input type="text" class="input-block-level" ng-model="payment.exp_year" placeholder="YY" data-stripe="exp-year" size="2"/>
+                </div>
+              </div>
+              
+              <div class="span3">
+                <label for="">Name on card </label>
+                <input type="text" class="input-block-level" ng-model="payment.name" data-stripe="name"/>
+              </div>
+              
+              <div class="span1">
+                <label for="">CVC</label>
+                <input type="text" class="input-block-level" ng-model="payment.cvc" size="4"/>
+              </div>
+
+              <div class="span4">
+                <label for="">Choose your plan</label>
+                
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="plan" class="input-block-level" ng-model="payment.plan" value="silver"/> Silver - $5.00
+                  </label>
+                </div>
+
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="plan" class="input-block-level" ng-model="payment.plan" value="gold" checked/> Gold - $9.99<br>
+                  </label>
+                </div>
+              
+              </div>
+
+              <div class="span4">
+                <label for="">Email</label>
+                <input type="text" class="input-block-level" ng-model="payment.description"/>
+              </div>
+
+              <div class="span4">
+                <button type="submit" class="btn btn-primary btn-large" ng-click="newPayment()">Submit</button>
+              </div>
+
+
+              </form>
+              
+              </div>
+              <pre>{{cardType}}|{{payment}}|</pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  <script src="/static/lib/js/jquery.payment.js"></script>
+  <script src="/static/lib/angular/angular-route.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/services.js"></script>
+  <script src="/static/js/controllers.js"></script>
+  <script src="/static/js/filters.js"></script>
+  <script src="/static/js/directives.js"></script>
+</body>
+</html>
