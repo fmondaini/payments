@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html ng-app="paymentsApp">
-  <head>
+{% extends "base.html" %}
 
-    <title>Payments App</title>
-
-    <link href="/static/lib/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/app.css"/>
-    
-    <script type="text/javascript" src="/static/lib/js/stripe.v2.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-    <script src="/static/lib/js/jquery-1.11.0.min.js"></script>
-
-    <script type="text/javascript">
-      Stripe.setPublishableKey('pk_test_xxaHRANqTFxEQkszICPIGq7y');
-    </script>
-    
-
-  </head>
-  <body>
-
+{% block content %}
     <div class="container" ng-controller="PaymentsController">
 
       <div class="row">
@@ -85,19 +67,11 @@
               </form>
               
               </div>
-              <pre>{{cardType}}|{{payment}}|</pre>
+              <h2>{{status}}</h2>
           </div>
         </div>
       </div>
 
     </div>
 
-  <script src="/static/lib/js/jquery.payment.js"></script>
-  <script src="/static/lib/angular/angular-route.js"></script>
-  <script src="/static/js/app.js"></script>
-  <script src="/static/js/services.js"></script>
-  <script src="/static/js/controllers.js"></script>
-  <script src="/static/js/filters.js"></script>
-  <script src="/static/js/directives.js"></script>
-</body>
-</html>
+{% endblock %}
