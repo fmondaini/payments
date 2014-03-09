@@ -20,6 +20,10 @@ print ROOT
 def index():
     return render_template('index.html', key=stripe_keys['publishable_key'])
 
+@app.route('/history')
+def history():
+    return render_template('history.html', key=stripe_keys['publishable_key'])
+
 @app.route('/charge', methods=['POST'])
 def charge():
     # Amount in cents
