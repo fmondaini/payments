@@ -20,7 +20,8 @@ paymentsApp
         'plan': plan,
         'email': email}}).
         success(function(data, status, headers, config) {
-          window.location.reload();
+          $scope.payment = {};
+          alert('Success!');
         }).
         error(function(data, status, headers, config) {
           console.log(data);
@@ -46,7 +47,6 @@ paymentsApp
     $scope.newPayment = function(){
       if($scope.validateCard()){
         Stripe.card.createToken($scope.payment, stripeResponseHandler);
-        $scope.payments = {}
       }
       
     }
