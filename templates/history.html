@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% raw %}
 <div class="container" ng-controller="CustomerController">
   <h1>History</h1>
-
+  
   <form>
     <label>Customer ID</label>
     <input type="text" class="form-control" ng-model="customer.id"/>
@@ -31,5 +31,6 @@
     </tbody>
   </table>
 </div>
+{% endraw %}
 
 {% endblock %}
