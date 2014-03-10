@@ -10,11 +10,8 @@ stripe_keys = {
 stripe.api_key = stripe_keys['secret_key']
 
 ROOT = os.path.dirname(os.path.realpath(__file__))
-app = Flask(
-    __name__,
-    template_folder=ROOT+'/templates')
-
-print ROOT
+app = Flask(__name__, template_folder=ROOT+'/templates')
+app.config['DEBUG'] = True
 
 @app.route('/')
 def index():

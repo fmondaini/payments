@@ -13,12 +13,13 @@ paymentsApp.controller('PaymentsController',
       return is_valid
     }
 
-
-    var charge = function(token){
-
-      $http({method: 'POST', url: '/charge', data:{'stripeToken': token}}).
+    var subscribe = function(token, plan, email){
+      $http({method: 'POST', url: '/subscribe', data: {
+        'stripeToken': token,
+        'plan': plan,
+        'email': email}}).
         success(function(data, status, headers, config) {
-          console.log('sucesso');
+          window.location.reload();
         }).
         error(function(data, status, headers, config) {
           console.log(data);
@@ -39,13 +40,14 @@ paymentsApp.controller('PaymentsController',
         $form.append($('<input type="hidden" name="stripeToken" />').val(token));
 
         // Charge
-        charge(token);
+        subscribe(token, $scope.payment.plan, $scope.payment.email);
       }
     };
 
     $scope.newPayment = function(){
       if($scope.validateCard()){
         Stripe.card.createToken($scope.payment, stripeResponseHandler);
+        $scope.payments = {}
       }
       
     }
