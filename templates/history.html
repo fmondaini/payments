@@ -10,23 +10,20 @@
     <input type="text" class="form-control" ng-model="customer.id"/>
     <button ng-click="getPurchaseHistory()" class="btn btn-default">Search</button> 
   </form>
-  <pre>{{ customer }}</pre>
-
 
   <table class="table table-hover">
     <thead>
       <tr>
-        <td>Purchase ID</td>
-        <td>Amount</td>
-        <td>Date</td>
+        <td>Plan</td>
+        <td>Status</td>
+        <td>Months Paid</td>
       </tr> 
     </thead>
     <tbody>
-      <!-- NGREPEAT -->
       <tr>
-        <td>1</td>
-        <td>$5.00</td>
-        <td>2014-3-9</td>
+        <td>{{customer_data.subscriptions.data[0].plan.name}}</td>
+        <td>{{customer_data.subscriptions.data[0].status}}</td>
+        <td>{{customer_data.subscriptions.data[0].plan.interval_count}}</td>
       </tr> 
     </tbody>
   </table>

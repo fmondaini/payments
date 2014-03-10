@@ -58,7 +58,7 @@ paymentsApp
     $scope.getPurchaseHistory = function () {
       $http({method: 'POST', url: '/get_history', data:{'customer_id': $scope.customer.id}}).
       success(function(data, status, headers, config) {
-        $scope.customer = data;
+        $scope.customer_data = data;
       }).
       error(function(data, status, headers, config) {
         console.log(data);
