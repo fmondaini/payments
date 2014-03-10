@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request
 import stripe
+import json
 
 stripe_keys = {
     'secret_key': os.environ['SECRET_KEY'],
@@ -19,12 +20,15 @@ def index():
 
 @app.route('/history')
 def history():
-    return render_template('history.html', key=stripe_keys['publishable_key'])
+    return render_template('history.html')
 
-@app.route('/charge', methods=['POST'])
-def charge():
-    # Amount in cents
-    amount = 500
+@app.route('/get_history', methods=['POST'])
+def get_history():
+    customer = stripe.Customer.retrieve(request.json['customer_id'])
+    if customer:
+        return json.dumps(customer)
+    else:
+        return 'Customer not found'
 
 
 @app.route('/subscribe', methods=['POST'])
