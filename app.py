@@ -26,19 +26,21 @@ def charge():
     # Amount in cents
     amount = 500
 
+
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    # Save this object
     customer = stripe.Customer.create(
-        email='customer@example.com',
+        email=request.json['email'],
         card=request.json['stripeToken']
     )
+    print customer.id
 
-    charge = stripe.Charge.create(
-        customer=customer.id,
-        amount=amount,
-        currency='usd',
-        description='Flask Charge'
+    subscription = customer.subscriptions.create(
+        plan=request.json['plan'],
     )
 
-    return render_template('charge.html', amount=amount)
+    return 'True'
 
 # TODO: Create/Retrieve Customer
 

@@ -1,6 +1,7 @@
 'use strict';
 
-paymentsApp.controller('PaymentsController',
+paymentsApp
+.controller('PaymentsController',
   function PaymentsController($scope, $http){
     $scope.validateCard = function(){
       var is_valid = true;
@@ -34,10 +35,8 @@ paymentsApp.controller('PaymentsController',
         $form.find('.payment-errors').text(response.error.message);
         $form.find('button').prop('disabled', false);
       } else {
-
         // Token
         var token = response.id;
-        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
 
         // Charge
         subscribe(token, $scope.payment.plan, $scope.payment.email);
