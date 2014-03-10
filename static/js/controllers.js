@@ -52,4 +52,18 @@ paymentsApp.controller('PaymentsController',
       
     }
   }
+)
+
+.controller('CustomerController',
+  function CustomerController($scope, $http){
+    $scope.getPurchaseHistory = function () {
+      $http({method: 'POST', url: '/get_history', data:{'customer_id': $scope.customer.id}}).
+      success(function(data, status, headers, config) {
+        $scope.customer = data;
+      }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+      });
+    }
+  }
 );
