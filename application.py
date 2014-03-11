@@ -3,6 +3,10 @@ from flask import Flask, render_template, request
 import stripe
 import json
 
+
+"""
+configuration
+"""
 stripe_keys = {
     'secret_key': os.environ['SECRET_KEY'],
     'publishable_key': os.environ['PUBLISHABLE_KEY']
@@ -13,6 +17,20 @@ stripe.api_key = stripe_keys['secret_key']
 ROOT = os.path.dirname(os.path.realpath(__file__))
 app = Flask(__name__, template_folder=ROOT+'/templates')
 app.config['DEBUG'] = True
+
+JWT_AUTH_ENDPOINT = os.enriron['JWT_AUTH_ENDPOINT']
+
+
+"""
+Routes
+"""
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
 
 @app.route('/')
 def index():
@@ -29,7 +47,6 @@ def get_history():
         return json.dumps(customer)
     else:
         return 'Customer not found'
-
 
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
