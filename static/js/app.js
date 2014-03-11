@@ -5,5 +5,10 @@ var paymentsApp = angular.module('paymentsApp', [
   'ngRoute',
   'paymentsApp.filters',
   'paymentsApp.services',
-  'paymentsApp.directives'
+  'paymentsApp.directives',
+  'goangular'
 ]);
+
+paymentsApp.config(function($goConnectionProvider) {
+  $goConnectionProvider.$set('https://goinstant.net/4deb96fc5793/payments');
+})
