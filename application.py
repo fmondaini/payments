@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request
 import stripe
 import json
-
+import jwt
 
 """
 configuration
@@ -18,14 +18,44 @@ ROOT = os.path.dirname(os.path.realpath(__file__))
 app = Flask(__name__, template_folder=ROOT+'/templates')
 app.config['DEBUG'] = True
 
-JWT_AUTH_ENDPOINT = os.enriron['JWT_AUTH_ENDPOINT']
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
+"""
+Utils
+"""
+def generate_payload(info):
+    payload = {
+        iss: 'auth.example.com',
+        sub: info['customer_id'],
+        dn: info['username'],
+        email: info['email'],
+        pw: info['password'],
+        g: {
+            id: 'customers',
+            dn: 'Customers Group'
+        }
+    }
+
+    decoded_secret = base64.decodestring(app.config['SECRET_KEY'])
+    return jwt.encode(payload, decoded_secret)
 
 """
 Routes
 """
 @app.route('/login')
 def login():
+    """
+    Atributes for the payload:
+    {
+        iss: 'auth.example.com'
+        sub: customer_id_from stripe (number)
+        dn: 'User Name'
+        g: [
+            id: 1,
+            dn: 'customers'
+        ]
+    }
+    """
     return render_template('login.html')
 
 @app.route('/signup')
