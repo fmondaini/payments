@@ -1,12 +1,13 @@
 Flask==0.10.1
-Flask-JWT==0.1.0
 Jinja2==2.7.2
 MarkupSafe==0.19
 PyJWT==0.1.9
+Pygments==1.6
 Werkzeug==0.9.4
 gunicorn==18.0
 itsdangerous==0.23
-newrelic==2.16.0.12
+pudb==2013.5.1
 requests==0.13.2
 stripe==1.12.0
+urwid==1.2.0
 wsgiref==0.1.2
