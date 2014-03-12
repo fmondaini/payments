@@ -1,7 +1,19 @@
-{% extends base.html %}
+{% extends "base.html" %}
 
 {% block content %}
 {% raw %}
-SignUp
+<div ng-controller="SignupController">
+    <div class="row">
+        <div class="span4 offset5 well">
+              <legend>Sign up!</legend>
+            <form accept-charset="UTF-8" action="" method="post">
+                <input required class="span4" ng-model="new_user.fullname" name="name" placeholder="Full Name" type="text"> 
+                <input required class="span4" ng-model="new_user.username" name="username" placeholder="Username" type="text">
+                <input required class="span4" ng-model="new_user.password" name="password" placeholder="Password" type="password"> 
+                <button class="btn btn-success" type="submit">Sign up!</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endraw %}
 {% endblock%}
