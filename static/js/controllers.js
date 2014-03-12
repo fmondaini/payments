@@ -65,4 +65,14 @@ paymentsApp
       });
     }
   }
+)
+
+.controller('SignupController',
+  function SignupController($scope, $http, $goKey){
+  }
+)
+
+.controller('LoginController',
+  function LoginController($scope, $http){
+  }
 );
