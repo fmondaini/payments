@@ -17,25 +17,25 @@
 
               <div class="span4">
                 <label for="">Card number</label>
-                <input type="text" class="input-block-level" ng-model="payment.number" placeholder="XXXX XXXX XXXX XXXX" size="20"/>
+                <input required type="text" class="input-block-level" ng-model="payment.number" placeholder="XXXX XXXX XXXX XXXX" ng-maxlength="20" size="20"/>
               </div>
               
               <div class="span4 inline">
               <label for="">Expiry</label>
                 <div>
-                <input type="text" class="input-block-level" ng-model="payment.exp_month" placeholder="MM" data-stripe="exp-month" size="2"/>
-                <input type="text" class="input-block-level" ng-model="payment.exp_year" placeholder="YY" data-stripe="exp-year" size="2"/>
+                <input required type="text" class="input-block-level" ng-model="payment.exp_month" placeholder="MM" data-stripe="exp-month" ng-maxlength="2" size="2"/>
+                <input required type="text" class="input-block-level" ng-model="payment.exp_year" placeholder="YY" data-stripe="exp-year" ng-maxlength="2" size="2"/>
                 </div>
               </div>
               
               <div class="span3">
                 <label for="">Name on card </label>
-                <input type="text" class="input-block-level" ng-model="payment.name" data-stripe="name"/>
+                <input required type="text" class="input-block-level" ng-model="payment.name" data-stripe="name"/>
               </div>
               
               <div class="span1">
                 <label for="">CVC</label>
-                <input type="text" class="input-block-level" ng-model="payment.cvc" size="4"/>
+                <input required type="text" class="input-block-level" ng-model="payment.cvc" ng-maxlength="4" size="4"/>
               </div>
 
               <div class="span4">
@@ -57,7 +57,7 @@
 
               <div class="span4">
                 <label for="">Email</label>
-                <input type="text" class="input-block-level" ng-model="payment.email"/>
+                <input required type="text" class="input-block-level" ng-model="payment.email"/>
               </div>
 
               <div class="span4">
