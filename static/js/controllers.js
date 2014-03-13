@@ -69,6 +69,31 @@ paymentsApp
 
 .controller('SignupController',
   function SignupController($scope, $http, $goKey){
+    $scope.users = $goKey('users');
+    $scope.users.$sync()
+
+    $scope.validate = function(){
+      if ($scope.signupForm.$valid) {
+        $scope.status = 'true';
+        return true;
+
+      } else{
+        $scope.status = 'false';
+        return false;
+      };
+    }
+
+    $scope.signup = function(){
+      if ($scope.validate()) {
+        $scope.users.$on('ready', function() {
+          var newUser = $scope.users.$key('customer_id');
+          newUser.$key('username').$set($scope.new_user.username);
+          newUser.$key('email').$set($scope.new_user.email);
+          newUser.$key('password').$set($scope.new_user.password);
+        });
+        $scope.new_user = {};
+      };
+    }
   }
 )
 

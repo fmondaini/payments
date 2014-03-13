@@ -6,12 +6,15 @@
     <div class="row">
         <div class="span4 offset5 well">
               <legend>Sign up!</legend>
-            <form accept-charset="UTF-8" action="" method="post">
-                <input required class="span4" ng-model="new_user.fullname" name="name" placeholder="Full Name" type="text"> 
+            <form accept-charset="UTF-8" action="" name="signupForm" method="post">
                 <input required class="span4" ng-model="new_user.username" name="username" placeholder="Username" type="text">
+                <input required class="span4" ng-model="new_user.email" name="email" placeholder="Insert your email" type="email"> 
                 <input required class="span4" ng-model="new_user.password" name="password" placeholder="Password" type="password"> 
-                <button class="btn btn-success" type="submit">Sign up!</button>
+                
+                <button class="btn btn-success" type="submit" ng-click="signup()">Sign up!</button>
+                <button class="btn btn-warning" ng-click="validate()">Valid?</button>
             </form>
+            <pre>{{status}}</pre>
         </div>
     </div>
 </div>
