@@ -79,64 +79,36 @@ paymentsApp
 )
 
 .controller('SignupController',
-    function SignupController($scope, $http, $goKey) {
-    $scope.users = $goKey('users', 'lobby');
-    $scope.users.$sync();
+  function SignupController($scope, $http, $goKey, $goConnection) {
+    $goConnection.$ready().then(function(connection) {
+      return connection.room('lobby').join().get('users');
+    })
+      .then(function(room) {
 
-    // var verify = function(route, param) {
-    //   _url = 'verify/' + username + '/' + param;
-    //   $http({
-    //     method: 'GET',
-    //     url: _url
-    //   }).
-    //   success(function(data, status, headers, config) {
-    //     return data
-    //   }).
-    //   error(function(data, status, headers, config) {
-    //     console.log(data);
-    //     return 'Error'
-    //   });
-    // };
 
-    // var verifyUsername = function() {
-    //   return verify('username', $scope.new_user.username);
-    // };
+        $scope.users = $goKey('users', 'lobby');
+        $scope.users.$sync();
 
-    // var verifyEmail = function() {
-    //   return verify('email', $scope.new_user.email);
-    // };
-
-    // $scope.validate = function() {
-    //   // if ($scope.signupForm.$valid) {
-    //   //   if (verifyUsername() & verifyEmail()) {
-    //   //     return true;
-    //   //   }
-    //   // };
-    //   return true
-    // };
-
-    var new_customer = function(){
-      $http({
-        method: 'POST',
-        url: '/customer/new',
-        data: {
-          'email': $scope.new_user.email
+        var new_customer = function() {
+          $http({
+            method: 'POST',
+            url: '/customer/new',
+            data: {
+              'email': $scope.new_user.email
+            }
+          }).
+          success(function(data, status, headers, config) {
+            $scope.new_user.id = data.customer_id;
+            console.log('Customer Created!');
+          }).
+          error(function(data, status, headers, config) {
+            console.log(data);
+          });
         }
-      }).
-      success(function(data, status, headers, config) {
-        $scope.new_user.id = data.customer_id;
-        console.log('Customer Created!');
-      }).
-      error(function(data, status, headers, config) {
-        console.log(data);
-      });
-    }
 
-    $scope.signup = function() {
-      // if ($scope.validate()) {
+        $scope.signup = function() {
+          new_customer(); //customer_id is not being added, maybe because this is not a synchronous call.
 
-          new_customer();
-          // Add a new user
           $scope.users.$add($scope.new_user)
             .then(
               function(result) {
@@ -147,11 +119,16 @@ paymentsApp
                 console.log(err);
               }
           );
+        };
 
-        // });
 
-      // };
-    };
+      })
+      .
+    catch (function(err) {
+      console.log(data);
+    });
+
+
   }
   //End SignupController function
 )
