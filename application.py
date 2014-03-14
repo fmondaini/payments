@@ -80,21 +80,30 @@ def get_history():
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
     # Save this object
-    customer = stripe.Customer.create(
-        email=request.json['email'],
-        card=request.json['stripeToken']
-    )
-    print customer.id
+    customer = create_customer(request.json['email'], request.json['stripeToken'])
 
     subscription = customer.subscriptions.create(
         plan=request.json['plan'],
     )
 
-    return 'True'
+    return json.dumps(subscription)
 
-# TODO: Create/Retrieve Customer
+# Would be better if it were an AngularJS Service
+@app.route('/customer/<customer_id>')
+def get_customer(customer_id):
+    return json.dumps(stripe.Customer.retrieve(customer_id))
 
-# TODO: Retrieve Payments
+@app.route('/customer/new', methods=['POST'])
+def new_customer():
+    return json.dumps(create_customer(request.json['email']))
+
+@app.route('/verify/username/<username>')
+def verify_user(username):
+    return json.dumps(False)
+
+@app.route('/verify/email/<email>')
+def verify_email(email):
+    return json.dumps(False)
 
 if __name__ == '__main__':
     app.run(debug=True)
