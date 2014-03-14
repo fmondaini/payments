@@ -21,42 +21,40 @@ app.config['DEBUG'] = True
 
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
+
 """
 Utils
 """
-def generate_payload(info):
+def create_customer(email, card=None):
+    return stripe.Customer.create(
+        email=email,
+        card=card
+    )
+
+
+"""
+Routes
+"""
+@app.route('/auth', methods=['POST'])
+def auth():
     payload = {
-        iss: 'auth.example.com',
-        sub: info['customer_id'],
-        dn: info['username'],
-        email: info['email'],
-        pw: info['password'],
-        g: {
-            id: 'customers',
-            dn: 'Customers Group'
+        'iss': 'hidden-plains-5795.herokuapp.com',
+        'sub': request.json['customer_id'],
+        'dn': request.json['username'],
+        'email': request.json['email'],
+        'pw': request.json['password'],
+        'g': {
+            'id': 'customers',
+            'dn': 'Customers Group'
         }
     }
 
     decoded_secret = base64.decodestring(app.config['SECRET_KEY'])
     return jwt.encode(payload, decoded_secret)
 
-"""
-Routes
-"""
+
 @app.route('/login')
 def login():
-    """
-    Atributes for the payload:
-    {
-        iss: 'auth.example.com'
-        sub: customer_id_from stripe (number)
-        dn: 'User Name'
-        g: [
-            id: 1,
-            dn: 'customers'
-        ]
-    }
-    """
     return render_template('login.html')
 
 @app.route('/signup')
